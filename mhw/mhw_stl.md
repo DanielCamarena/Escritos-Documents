@@ -23,15 +23,15 @@ Las olas de calor marinas (MHWs) son episodios de SST inusualmente alta y persis
 Sea $y_t$ la SST diaria en el día $t$. La descomposición STL plantea:
 
 $$
-y_t = T_t + S_t + R_t, \tag{1}
+y_t = T_t + S_t + R_t, 
 $$
 
 $$
-B_t = T_t + S_t, \quad\text{(baseline)} \tag{2}
+B_t = T_t + S_t, \quad\text{(baseline)}
 $$
 
 $$
-R_t = y_t - B_t, \quad\text{(residuo)} \tag{3}
+R_t = y_t - B_t, \quad\text{(residuo)}
 $$
 
 donde $B_t$ es la climatología dependiente del tiempo. Para cada día del año $d\in\{1,\dots,365\}$ se estima el umbral percentilar del residuo:
@@ -79,13 +79,13 @@ La **categoría** (1–4) sigue umbrales por múltiplos de la excedencia de Hobd
 
 ```mermaid
 graph TD
-    A[SST diaria $y_t$ y tiempo $t$] --> B[STL: $y_t = T_t + S_t + R_t$\nBaseline $B_t = T_t + S_t$]
-    B --> C[Umbral por DOY: $\theta_t = P_{90}(R|DOY)$\n(suavizado)]
-    C --> D[Marcado diario: $R_t > \theta_t$]
-    D --> E[Agrupar días $\ge d_{\min}$ y unir huecos $\le 2$]
-    E --> F[Métricas de evento: $D$, $I_{\max}$, $I_{\mathrm{mean}}$, $I_{\mathrm{cum}}$, tasas, categoría]
-    F --> G[blockAverage: agregación por años]
-    G --> H[meanTrend: tendencias $\pm$ IC]
+    A[SST diaria y tiempo] --> B[STL: y = T + S + R<br>Baseline B = T + S]
+    B --> C[Umbral por DOY: percentil 90 del residuo<br>suavizado]
+    C --> D[Marcado diario: residuo > umbral]
+    D --> E[Agrupar días >= duracion minima<br>y unir huecos <= 2 dias]
+    E --> F[Metricas de evento: duracion,<br>intensidades, tasas, categoria]
+    F --> G[blockAverage: agregacion por años]
+    G --> H[meanTrend: tendencias ± IC]
     H --> I[rank: ranking y retorno]
 ```
 
