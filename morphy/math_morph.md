@@ -87,19 +87,21 @@ El presente reporte adopta deliberadamente un orden de exposición donde la teor
 
 ### Conjuntos, imágenes y estructuras de orden
 
-La formulación clásica de la morfología matemática parte de la teoría de conjuntos. Si una imagen binaria se interpreta como el conjunto de píxeles pertenecientes al objeto, entonces muchas operaciones sobre la imagen pueden formularse como operaciones entre conjuntos. Sea \(E\) un espacio discreto, usualmente una grilla bidimensional
+La formulación clásica de la morfología matemática parte de la teoría de conjuntos. Si una imagen binaria se interpreta como el conjunto de píxeles pertenecientes al objeto, entonces muchas operaciones sobre la imagen pueden formularse como operaciones entre conjuntos. Sea $E$ un espacio discreto, usualmente una grilla bidimensional
 
-\[
+```math
 E \subseteq \mathbb{Z}^2.
-\]
+```
 
-Una imagen binaria puede representarse como un subconjunto \(A \subseteq E\), donde cada punto de \(A\) corresponde a un píxel activo u objeto.
+
+Una imagen binaria puede representarse como un subconjunto $A \subseteq E$, donde cada punto de $A$ corresponde a un píxel activo u objeto.
 
 Con el desarrollo de la teoría, este enfoque se amplió hacia imágenes en escala de grises, modeladas como funciones
 
-\[
+```math
 f : E \to \mathbb{R}.
-\]
+```
+
 
 En este caso, la morfología deja de actuar solo sobre pertenencia o no pertenencia, y pasa a operar sobre órdenes parciales entre funciones. Esto conduce a una formulación sobre *retículas completas*, donde existen operaciones de supremo e ínfimo. La importancia de este marco radica en que muchos operadores morfológicos pueden definirse abstractamente como aplicaciones crecientes que preservan ciertas propiedades de orden.
 
@@ -112,60 +114,64 @@ Una retícula es un conjunto parcialmente ordenado donde cada par de elementos a
 #### Imágenes binarias
 Una imagen binaria puede verse como una función indicadora
 
-\[
+```math
 \chi_A(x)=
 \begin{cases}
 1, & x \in A,\\
 0, & x \notin A.
 \end{cases}
-\]
+```
+
 
 Esta representación es útil cuando el interés está puesto en presencia/ausencia de un objeto, o cuando una imagen continua ha sido umbralizada para obtener una máscara.
 
 #### Imágenes en niveles de gris
-Una imagen en niveles de gris se representa por una función escalar \(f(x)\) definida sobre la grilla. Aquí la intensidad del píxel importa, y los operadores morfológicos actúan desplazando máximos y mínimos locales bajo la acción del elemento estructurante.
+Una imagen en niveles de gris se representa por una función escalar $f(x)$ definida sobre la grilla. Aquí la intensidad del píxel importa, y los operadores morfológicos actúan desplazando máximos y mínimos locales bajo la acción del elemento estructurante.
 
 #### Imágenes multivariadas
 En aplicaciones reales es común trabajar con imágenes multicanal o campos multivariados, por ejemplo bandas espectrales de satélite o variables físicas asociadas. La extensión morfológica a este caso requiere definir un orden adecuado entre vectores o recurrir a estrategias por componente, transformaciones previas o enfoques vectoriales especializados.
 
 ### Elemento estructurante
 
-El elemento estructurante es una pieza central de la teoría. Se trata de un conjunto pequeño \(B \subseteq E\) o, más generalmente, de una función auxiliar que define la geometría local con la cual la imagen será interrogada. En términos intuitivos, el elemento estructurante fija la forma, escala y orientación de la exploración local.
+El elemento estructurante es una pieza central de la teoría. Se trata de un conjunto pequeño $B \subseteq E$ o, más generalmente, de una función auxiliar que define la geometría local con la cual la imagen será interrogada. En términos intuitivos, el elemento estructurante fija la forma, escala y orientación de la exploración local.
 
-Por ejemplo, si \(B\) es un disco pequeño, el operador tenderá a preservar o enfatizar estructuras aproximadamente isotrópicas. Si \(B\) es una línea orientada, el análisis será sensible a estructuras alargadas en una dirección concreta. Esta relación entre la forma del elemento estructurante y la interpretación geométrica del resultado es una de las razones por las cuales la morfología matemática es especialmente valiosa en problemas con significado físico.
+Por ejemplo, si $B$ es un disco pequeño, el operador tenderá a preservar o enfatizar estructuras aproximadamente isotrópicas. Si $B$ es una línea orientada, el análisis será sensible a estructuras alargadas en una dirección concreta. Esta relación entre la forma del elemento estructurante y la interpretación geométrica del resultado es una de las razones por las cuales la morfología matemática es especialmente valiosa en problemas con significado físico.
 
 ### Erosión y dilatación
 
 #### Erosión en imágenes binarias
-Sea \(A \subseteq E\) una imagen binaria y \(B\) un elemento estructurante. La erosión de \(A\) por \(B\) se define como
+Sea $A \subseteq E$ una imagen binaria y $B$ un elemento estructurante. La erosión de $A$ por $B$ se define como
 
-\[
+```math
 A \ominus B = \{x \in E : B_x \subseteq A\},
-\]
+```
 
-donde \(B_x\) denota la traslación de \(B\) centrada en \(x\).
+
+donde $B_x$ denota la traslación de $B$ centrada en $x$.
 
 Interpretación: un punto permanece en la imagen erosionada solo si el elemento estructurante cabe completamente dentro del objeto al colocarse en dicho punto. La erosión tiende a contraer los objetos, eliminar protrusiones pequeñas y romper conexiones delgadas.
 
 #### Dilatación en imágenes binarias
-La dilatación de \(A\) por \(B\) se define como
+La dilatación de $A$ por $B$ se define como
 
-\[
+```math
 A \oplus B = \{x \in E : (\hat{B})_x \cap A \neq \varnothing\},
-\]
+```
 
-donde \(\hat{B}\) es la reflexión de \(B\) respecto del origen.
 
-Interpretación: la dilatación expande el objeto, rellena huecos pequeños y conecta regiones próximas si la distancia entre ellas es menor que la escala impuesta por \(B\).
+donde $\hat{B}$ es la reflexión de $B$ respecto del origen.
+
+Interpretación: la dilatación expande el objeto, rellena huecos pequeños y conecta regiones próximas si la distancia entre ellas es menor que la escala impuesta por $B$.
 
 #### Versión en niveles de gris
-Para una imagen en niveles de gris \(f\) y un elemento estructurante plano \(B\), la dilatación y la erosión pueden escribirse como
+Para una imagen en niveles de gris $f$ y un elemento estructurante plano $B$, la dilatación y la erosión pueden escribirse como
 
-\[
+```math
 (\delta_B f)(x) = \sup_{b \in B} f(x-b),
 \qquad
 (\varepsilon_B f)(x) = \inf_{b \in B} f(x+b).
-\]
+```
+
 
 Estas expresiones muestran que la dilatación actúa como un máximo local móvil y la erosión como un mínimo local móvil.
 
@@ -173,29 +179,33 @@ Estas expresiones muestran que la dilatación actúa como un máximo local móvi
 
 La apertura se define como una erosión seguida de una dilatación:
 
-\[
+```math
 A \circ B = (A \ominus B)\oplus B.
-\]
+```
+
 
 La apertura es *anti-extensiva*, es decir,
 
-\[
+```math
 A \circ B \subseteq A.
-\]
+```
+
 
 Geométricamente, elimina detalles brillantes o salientes pequeños que no pueden contener al elemento estructurante. Además, suaviza contornos y rompe puentes estrechos.
 
 El cierre se define como una dilatación seguida de una erosión:
 
-\[
+```math
 A \bullet B = (A \oplus B)\ominus B.
-\]
+```
+
 
 El cierre es *extensivo*,
 
-\[
+```math
 A \subseteq A \bullet B.
-\]
+```
+
 
 Tiende a rellenar huecos oscuros pequeños, cerrar grietas y conectar discontinuidades estrechas.
 
@@ -205,22 +215,30 @@ Una parte importante de la elegancia de la teoría morfológica es la dualidad e
 
 Entre las propiedades más relevantes destacan:
 
-- **Crecimiento:** si \(A \subseteq C\), entonces
-  \[
-  A \ominus B \subseteq C \ominus B, \qquad A \oplus B \subseteq C \oplus B.
-  \]
+- **Crecimiento:** si $A \subseteq C$, entonces
+  
+```math
+A \ominus B \subseteq C \ominus B, \qquad A \oplus B \subseteq C \oplus B.
+```
+
 - **Anti-extensividad de la apertura:**
-  \[
-  A \circ B \subseteq A.
-  \]
+  
+```math
+A \circ B \subseteq A.
+```
+
 - **Extensividad del cierre:**
-  \[
-  A \subseteq A \bullet B.
-  \]
+  
+```math
+A \subseteq A \bullet B.
+```
+
 - **Idempotencia:**
-  \[
-  (A \circ B)\circ B = A \circ B, \qquad (A \bullet B)\bullet B = A \bullet B.
-  \]
+  
+```math
+(A \circ B)\circ B = A \circ B, \qquad (A \bullet B)\bullet B = A \bullet B.
+```
+
 
 Estas propiedades son esenciales para interpretar los operadores como filtros geométricos estables.
 
@@ -228,25 +246,28 @@ Estas propiedades son esenciales para interpretar los operadores como filtros ge
 
 El gradiente morfológico es una medida de contraste espacial construida a partir de dilatación y erosión:
 
-\[
+```math
 \nabla_B f = \delta_B f - \varepsilon_B f.
-\]
+```
+
 
 Este operador resalta transiciones locales y, por ello, suele emplearse en detección de bordes.
 
 El *white top-hat* se define como
 
-\[
-\operatorname{WTH}_B(f)=f-(f\circ B),
-\]
+```math
+\mathrm{WTH}_B(f)=f-(f\circ B),
+```
 
-y destaca detalles brillantes pequeños respecto de la escala impuesta por \(B\).
+
+y destaca detalles brillantes pequeños respecto de la escala impuesta por $B$.
 
 El *black-hat* se define como
 
-\[
-\operatorname{BTH}_B(f)=(f\bullet B)-f,
-\]
+```math
+\mathrm{BTH}_B(f)=(f\bullet B)-f,
+```
+
 
 y enfatiza detalles oscuros pequeños.
 
@@ -280,11 +301,12 @@ Esto los vuelve conceptualmente muy atractivos para aplicaciones científicas do
 
 Una granulometría es una familia de aperturas parametrizadas por el tamaño del elemento estructurante:
 
-\[
+```math
 \{\gamma_{\lambda}\}_{\lambda \ge 0},
-\]
+```
 
-donde \(\lambda\) representa la escala. El análisis de cómo la imagen cambia con \(\lambda\) permite inferir distribuciones de tamaño de estructuras. Esta idea es central en análisis multiescala: en vez de estudiar la imagen a una sola resolución geométrica, se examina qué rasgos persisten, emergen o desaparecen a distintas escalas.
+
+donde $\lambda$ representa la escala. El análisis de cómo la imagen cambia con $\lambda$ permite inferir distribuciones de tamaño de estructuras. Esta idea es central en análisis multiescala: en vez de estudiar la imagen a una sola resolución geométrica, se examina qué rasgos persisten, emergen o desaparecen a distintas escalas.
 
 En problemas geofísicos, esta perspectiva es particularmente útil porque los fenómenos pueden exhibir una jerarquía espacial clara: parches pequeños embebidos en regiones grandes, frentes delgados sobre campos amplios o estructuras coherentes cuya interpretación depende de la escala física seleccionada.
 
@@ -332,9 +354,10 @@ Toda imagen digital es una aproximación discreta de un campo continuo. Si el fe
 
 Matemáticamente, una imagen puede representarse por una matriz
 
-\[
+```math
 I = (I_{ij})_{i=1,\dots,m;\,j=1,\dots,n},
-\]
+```
+
 
 donde cada entrada corresponde a un píxel. En contextos multibanda o espacio-temporales, esta representación se extiende a tensores.
 
